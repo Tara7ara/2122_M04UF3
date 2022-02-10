@@ -5,8 +5,8 @@ let fs = require("fs");
 
 let http_server = http.createServer(function(req, res){
 
-	if (req.url == "/character.png"){
-	fs.readFile("character.png", function(err, data){
+	if (req.url == "/calle.png"){
+	fs.readFile("calle.png", function(err, data){
 		if (err){
 				console.log("ERROR");
 				return
@@ -27,7 +27,6 @@ let http_server = http.createServer(function(req, res){
 		}		
 
 		res.writeHead(200);
-
 		res.end(data);
 	});
 

@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Te falta calle</h1>
-<img src="calle.png" />
+
 <script>
 let config = {
 	width: 800,
@@ -22,15 +22,30 @@ let game = new Phaser.Game(config);
 function preload ()
 {
     this.load.image('character','character.png');
+
+	//mapa
+	this.load.image('calle','calle.png');
+	//coche que son mas 3D
+    this.load.image('transport','transport.png');
+    this.load.image('trucktank','trucktank.png');
+    this.load.image('formula','formula.png');
+    this.load.image('suv_green','suv_green.png');
+	//coches que quiero usar	
+    this.load.image('car1','car_black_1.png');
+    this.load.image('car2','car_blue_2.png');
+    this.load.image('car3','car_red_2.png');
+    this.load.image('car4','car_yellow_4.png');
 	}
 
 function create(){
 	graphics = this.add.graphics();
 	image = this.add.image(400, 300, 'character');
+	image = this.add.image(400, 300, 'calle');
 }
 
 function update(){
-image.rotation += 0.01;
+//para girar la img
+//image.rotation += 0.01;
 }
 
 </script>
