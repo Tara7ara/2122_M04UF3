@@ -3,21 +3,21 @@
 let http = require("http");
 let fs = require("fs");
 
-let http_server = http.createServer(function(req, res){
+const data = require('./images.json');
 
-	if (req.url == "/calle.png"){
-	fs.readFile("calle.png", function(err, data){
-		if (err){
-				console.log("ERROR");
+let http_server = http.createServer(function(request, response){
+
+	for (let i = 0; i < data.images.length; i++){
+		if (request.url == "/" + data.images[i]){
+		fs.readFile(data.images[i], function(err, data){
+			if (err) {
+				console.log("error");
 				return
-		}	
-
-		res.writeHead(200);
-		res.end(data);
-	});
-
-	return
-
+			}
+			response.writeHead(200);
+			response.end(data);
+		});
+	}	
 }
 
 	fs.readFile("index.html", function(err, data){
@@ -25,9 +25,8 @@ let http_server = http.createServer(function(req, res){
 				console.log("ERROR");
 				return
 		}		
-
-		res.writeHead(200);
-		res.end(data);
+		response.writeHead(200);
+		response.end(data);
 	});
 
 	}).listen(1905);
