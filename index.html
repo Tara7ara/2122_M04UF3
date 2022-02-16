@@ -13,6 +13,13 @@ let game_h = 600;
 let config = {
 	width: game_w,
 	height: game_h,
+	//personaje (ns si funciona)
+	   physics: {
+        default:'arcade',
+        arcade: {
+            debug: true
+        }
+		   
 	scene: {
 		preload: preload,	
 		create: create,
@@ -54,10 +61,22 @@ function preload ()
     this.load.image('car4','car_yellow_4.png');
 	}
 
+//personaje (ns si funciona)
+    function checkcars(car){
+
+    if(car.x >800+20){
+    car.x = offset_x;
+    }    
+    if(car.x < 0-20){
+    car.x = 800;}
+    }
+	
 function create(){
 	graphics = this.add.graphics();
 	image = this.add.image(game_w/2, game_h/2, 'calle');
-	character_img = this.add.image(game_w/2, 40, 'character');
+	player_img = this.add.image(game_w/2, 40, 'character');
+	//personaje (ns si funciona)
+	this.physics.add.existing(player_img, true);
 
 	car1_img = this.add.image(offset_x, 530, 'car1');
 	car2_img = this.add.image(car4_spawn, 380, 'car2');
@@ -72,6 +91,21 @@ function update(){
 //para girar la img
 //character_img.rotation += 0.01;
 
+//movimiento personaje (ns si funciona)
+if (cursors.up.isDown){
+    player_img.y -= player_speed;
+}
+else if (cursors.down.isDown){
+    player_img.y += player_speed;
+}
+if (cursors.left.isDown){
+    player_img.x -= player_speed;
+
+}
+else if (cursors.right.isDown){
+    player_img.x += player_speed;
+} 
+	
 car1_img.x += car1_speed;
 car2_img.x -= car3_speed;
 car3_img.x += car3_speed;
