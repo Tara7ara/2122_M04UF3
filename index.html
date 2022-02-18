@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
-<head><title>Cruzando la Calle Simulator</title>
+<head>
+<title>Cruzando la Calle Simulator</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
 </head>
 <body>
@@ -13,6 +14,8 @@ let game_h = 600;
 let config = {
 	width: game_w,
 	height: game_h,
+<<<<<<< HEAD
+=======
 	//personaje (ns si funciona)
 	   physics: {
         default:'arcade',
@@ -20,28 +23,80 @@ let config = {
             debug: true
         }
 		   
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
 	scene: {
 		preload: preload,	
 		create: create,
 		update: update
-
-	}
+	},
+	physics: {
+		default:'arcade',
+		arcade: {
+			debug:true
+		}
+	}	
 }
 let game = new Phaser.Game(config);
 
+<<<<<<< HEAD
+let character_img;
+
+=======
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
 let car1_img;
 let car2_img;
 let car3_img;
 let car4_img;
 
 let car4_spawn = 800;
+<<<<<<< HEAD
+=======
 
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
 let offset_x = -128;
 
 let car1_speed = 3;
 let car2_speed = 2;
 let car3_speed = 4;
 let car4_speed = 1;
+<<<<<<< HEAD
+let character_speed = 5;
+
+let lives_txt;
+let scores_txt;
+  
+let lives = 3;
+let scores = 0;
+
+let player_x = (game_w/4);
+let player_y = 40;
+
+let road1_y = 530;
+let road2_y = 380;
+let road3_y = 200;
+let road4_y = 310;
+
+let road_offset_y = 90;
+let crossing = false;
+
+function reset () {
+	crossing = false;
+	
+	character_img.x = player_x;
+	character_img.y = player_y;
+
+	car1_img.x = game_w-offset_x;
+
+	car2_img.x = game_w;
+
+	car3_img.x = game_w-offset_x;
+
+	car4_img.x = game_w;
+
+	
+}
+=======
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
 
 function preload ()
 {
@@ -61,7 +116,10 @@ function preload ()
     this.load.image('car4','car_yellow_4.png');
 	}
 
+<<<<<<< HEAD
+=======
 //personaje (ns si funciona)
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
     function checkcars(car){
 
     if(car.x >800+20){
@@ -72,25 +130,82 @@ function preload ()
     }
 	
 function create(){
+	cursors = this.input.keyboard.createCursorKeys();
 	graphics = this.add.graphics();
 	image = this.add.image(game_w/2, game_h/2, 'calle');
+<<<<<<< HEAD
+	character_img = this.add.image(game_w/4, 40, 'character');
+
+	this.physics.add.existing(character_img, false);
+=======
 	player_img = this.add.image(game_w/2, 40, 'character');
 	//personaje (ns si funciona)
 	this.physics.add.existing(player_img, true);
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
 
 	car1_img = this.add.image(offset_x, 530, 'car1');
 	car2_img = this.add.image(car4_spawn, 380, 'car2');
 	car3_img = this.add.image(offset_x, 200, 'car3');
 	car4_img = this.add.image(car4_spawn, 310, 'car4');
+<<<<<<< HEAD
+	
+	this.physics.add.existing(car1_img, false);
+	this.physics.add.existing(car2_img, false);
+	this.physics.add.existing(car3_img, false);
+	this.physics.add.existing(car4_img, false);
 
 	car2_img.flipX = true;
 	car4_img.flipX = true;
+
+	let cars = [car1_img, car2_img, car3_img, car4_img];
+
+	for (let i = 0; i < cars.length; i++){
+		this.physics.add.collider(character_img, cars[i], function (character, car){
+
+		lives--;
+		lives_txt.text = lives.toString();
+		reset();
+		});
+	}
+
+	this.add.text(game_w/2, 64, "VIDAS");
+	lives_txt = this.add.text(game_w/2+64, 64, "3");
+
+	this.add.text(game_w/2+128, 64, "PUNTOS");
+	scores_txt = this.add.text(game_w/2+196, 64, "0");
+
+=======
+
+	car2_img.flipX = true;
+	car4_img.flipX = true;
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
 }
 
 function update(){
 //para girar la img
 //character_img.rotation += 0.01;
 
+<<<<<<< HEAD
+if (cursors.up.isDown){
+	character_img.y -= character_speed;
+}
+if (cursors.down.isDown){
+	character_img.y += character_speed;
+}
+if (cursors.left.isDown){
+	character_img.x -= character_speed;
+}
+if (cursors.right.isDown){
+	character_img.x += character_speed;
+} 
+
+if (character_img.y > game_h - road_offset_y)
+	crossing = true;
+if (character_img.y <= road_offset_y && crossing){
+	crossing = false;
+	scores++;
+	scores_txt.text = scores.toString();
+=======
 //movimiento personaje (ns si funciona)
 if (cursors.up.isDown){
     player_img.y -= player_speed;
@@ -101,6 +216,7 @@ else if (cursors.down.isDown){
 if (cursors.left.isDown){
     player_img.x -= player_speed;
 
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
 }
 else if (cursors.right.isDown){
     player_img.x += player_speed;
@@ -111,6 +227,14 @@ car2_img.x -= car3_speed;
 car3_img.x += car3_speed;
 car4_img.x -= car4_speed;
 
+<<<<<<< HEAD
+car1_img.x += car1_speed;
+car2_img.x -= car2_speed;
+car3_img.x += car3_speed;
+car4_img.x -= car4_speed;
+
+=======
+>>>>>>> cbb3652abda706421bbf00faa12cb86eb3f2b486
 flipcar(car1_img);
 flipcar(car2_img);
 flipcar(car3_img);
